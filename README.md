@@ -65,6 +65,31 @@ python3 -m http.server 8080
      ```
 3. Ask your Canvas admin to allowlist your host domain in CSP settings if needed.
 
+### GitHub Pages Deployment
+
+Because this project is fully static (`index.html` + `assets/`), GitHub Pages is a good fit.
+
+> Tip: After updating files, allow 1–3 minutes for GitHub Pages to republish before testing changes in your browser.
+
+1. Push this project to a GitHub repository.
+2. In the repo, go to **Settings → Pages**.
+3. Under **Build and deployment**, choose:
+   - **Source:** `Deploy from a branch`
+   - **Branch:** `main` (or your default branch)
+   - **Folder:** `/ (root)`
+4. Click **Save** and wait for Pages to publish.
+5. Open the generated URL:
+   - `https://<your-username>.github.io/<repo-name>/`
+
+If your site doesn't load assets, confirm these are true:
+
+- `index.html` is in the selected Pages folder.
+- Asset links stay relative (this project already uses `assets/...` paths).
+- You're not using Jekyll processing. Add an empty `.nojekyll` file in the root if needed.
+- C runtime load errors ("Failed to load C runtime") usually mean your network/CSP is blocking CDN scripts.
+  - Preferred fix: download `JSCPP.es5.min.js` from the JSCPP project and place it at `assets/js/vendor/JSCPP.es5.min.js` so runtime loads from your own host first.
+  - Fallback: allow `cdn.jsdelivr.net` and/or `unpkg.com` in CSP/firewall rules.
+
 ## Adding New Content
 
 All course content is defined in [`assets/js/course-data.js`](assets/js/course-data.js). No code changes are needed to add lessons — just extend the JSON structure:
@@ -89,4 +114,3 @@ All course content is defined in [`assets/js/course-data.js`](assets/js/course-d
 ## License
 
 MIT
-
