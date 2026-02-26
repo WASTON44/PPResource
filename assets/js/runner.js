@@ -16,8 +16,9 @@ const Runner = (() => {
     // First, try same-origin file (works in strict CSP / offline deployments if vendored).
     'assets/js/vendor/JSCPP.es5.min.js',
     // Then fall back to public CDNs.
-    'https://cdn.jsdelivr.net/npm/jscpp@latest/dist/JSCPP.es5.min.js',
-    'https://unpkg.com/jscpp@latest/dist/JSCPP.es5.min.js'
+    'https://cdn.jsdelivr.net/npm/JSCPP@2.1.0/dist/JSCPP.es5.min.js',
+    'https://unpkg.com/JSCPP@2.1.0/dist/JSCPP.es5.min.js',
+    'https://fastly.jsdelivr.net/npm/JSCPP@2.1.0/dist/JSCPP.es5.min.js'
   ];
   const EXECUTION_TIMEOUT_MS = 5000;
 
