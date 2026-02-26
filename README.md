@@ -84,9 +84,12 @@ If your site doesn't load assets, confirm these are true:
 - `index.html` is in the selected Pages folder.
 - Asset links stay relative (this project already uses `assets/...` paths).
 - You're not using Jekyll processing. Add an empty `.nojekyll` file in the root if needed.
+<<<<<<< codex/find-how-to-host-on-github-pages-wbtdad
 - C runtime load errors ("Failed to load C runtime") usually mean your network/CSP is blocking CDN scripts.
   - Preferred fix: download `JSCPP.es5.min.js` from the JSCPP project and place it at `assets/js/vendor/JSCPP.es5.min.js` so runtime loads from your own host first.
   - Fallback: allow `cdn.jsdelivr.net` and/or `unpkg.com` in CSP/firewall rules.
+=======
+>>>>>>> main
 
 ## Adding New Content
 
