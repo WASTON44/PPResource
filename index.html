@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Introduction to C Programming — Interactive Course</title>
+  <meta name="description" content="An interactive, step-by-step C programming course with in-browser compilation. Canvas VLE compatible.">
+
+  <!-- CodeMirror 5 — lightweight embedded editor (CSS + JS via CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/material-darker.min.css">
+
+  <!-- Course styles -->
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<!-- ─── App shell ──────────────────────────────────────────────── -->
+<div id="appLayout">
+
+  <!-- ─ Top bar ──────────────────────────────────────────────── -->
+  <header id="topBar" role="banner">
+    <button id="toggleSidebarBtn" aria-label="Toggle course menu" title="Toggle menu">☰</button>
+    <span class="course-title">Introduction to C Programming</span>
+    <div id="progressArea" aria-label="Course progress"></div>
+  </header>
+
+  <!-- ─ Sidebar ──────────────────────────────────────────────── -->
+  <nav id="sidebar" role="navigation" aria-label="Course modules"></nav>
+
+  <!-- ─ Main content ─────────────────────────────────────────── -->
+  <main id="mainArea" role="main">
+    <div id="mainPanel">
+      <!-- Step content rendered here by app.js -->
+      <div style="padding:40px;text-align:center;color:#6b7280">
+        <p>Loading course…</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─ Bottom navigation ────────────────────────────────────── -->
+  <footer id="bottomNav" role="contentinfo">
+    <button class="btn btn-secondary" id="prevBtn" disabled aria-label="Previous step">
+      ← Back
+    </button>
+    <span id="stepIndicator" aria-live="polite"></span>
+    <button class="btn btn-primary" id="nextBtn" disabled aria-label="Next step">
+      Next →
+    </button>
+  </footer>
+
+</div>
+<!-- ─── End app shell ──────────────────────────────────────────── -->
+
+
+<!-- ─── Vendor scripts (CDN, loaded in order) ──────────────────── -->
+
+<!-- CodeMirror core -->
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js"></script>
+<!-- C/C++ syntax mode -->
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/clike/clike.min.js"></script>
+<!-- Quality-of-life addons -->
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/edit/closebrackets.min.js"></script>
+
+<!-- ─── Application scripts (dependency order) ─────────────────── -->
+<script src="assets/js/course-data.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/runner.js"></script>
+<script src="assets/js/editor.js"></script>
+<script src="assets/js/ui-components.js"></script>
+<script src="assets/js/app.js"></script>
+
+<!--
+  NOTE FOR CANVAS DEPLOYMENT
+  ===========================
+  Do NOT paste this file directly into a Canvas Page.
+  Canvas strips inline JavaScript and may enforce Content Security Policy.
+
+  Recommended deployment:
+  1. Upload all files to an HTTPS host (university web space, GitHub Pages, S3, etc.)
+  2. Embed in Canvas using:
+     a) External Tool (LTI) — preferred
+     b) <iframe src="https://your-host/index.html" width="100%" height="700"
+           allowfullscreen sandbox="allow-scripts allow-same-origin"></iframe>
+
+  The sandbox attribute for iframes should include:
+    allow-scripts allow-same-origin
+
+  Your Canvas admin may need to allowlist your host domain in the CSP settings.
+-->
+</body>
+</html>
