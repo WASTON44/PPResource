@@ -15,10 +15,13 @@ const Runner = (() => {
   const JSCPP_RUNTIME_SOURCES = [
     // First, try same-origin file (works in strict CSP / offline deployments if vendored).
     'assets/js/vendor/JSCPP.es5.min.js',
-    // Then fall back to public CDNs.
+    // Then fall back to public CDNs (npm-backed registries).
     'https://cdn.jsdelivr.net/npm/JSCPP@2.1.0/dist/JSCPP.es5.min.js',
     'https://unpkg.com/JSCPP@2.1.0/dist/JSCPP.es5.min.js',
-    'https://fastly.jsdelivr.net/npm/JSCPP@2.1.0/dist/JSCPP.es5.min.js'
+    'https://fastly.jsdelivr.net/npm/JSCPP@2.1.0/dist/JSCPP.es5.min.js',
+    // GitHub-backed mirrors (useful when npm CDN domains are blocked).
+    'https://cdn.jsdelivr.net/gh/felixhao28/JSCPP@master/dist/JSCPP.es5.min.js',
+    'https://rawcdn.githack.com/felixhao28/JSCPP/master/dist/JSCPP.es5.min.js'
   ];
   const EXECUTION_TIMEOUT_MS = 5000;
 
@@ -44,7 +47,7 @@ const Runner = (() => {
           reject(new Error(
             'Failed to load C runtime. Tried local + CDN sources. ' +
             'If you are hosting on GitHub Pages, ensure assets/js/vendor/JSCPP.es5.min.js exists ' +
-            'or allow access to jsdelivr/unpkg in your network or CSP.'
+            'or allow access to jsdelivr/unpkg/rawcdn.githack in your network or CSP.'
           ));
           return;
         }
