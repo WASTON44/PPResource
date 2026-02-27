@@ -191,7 +191,7 @@ const Runner = (() => {
         exitCode: 0,
         error: null,
         offline: true,
-        warning: `Runtime CDN blocked; executed in limited offline mode. ${reason || ''}`.trim()
+        warning: 'Using offline compiler mode (limited C features). Some advanced programs may not run until runtime access is restored.'
       };
     } catch (e) {
       return {
