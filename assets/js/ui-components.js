@@ -206,11 +206,20 @@ const UI = (() => {
   function showConsoleResult(result, el) {
     el.innerHTML = '';
     if (result.error) {
-      el.innerHTML = `<span class="console-error">⚠ Error\n${escapeHtml(result.error)}</span>`;
-    } else if (result.output) {
-      el.innerHTML = `<span class="console-output-text">${escapeHtml(result.output)}</span>`;
+      el.innerHTML = `<span class="console-error">⚠ Error
+${escapeHtml(result.error)}</span>`;
+      return;
+    }
+
+    const warningHtml = result.warning
+      ? `<span class="console-error">⚠ ${escapeHtml(result.warning)}</span>
+`
+      : '';
+
+    if (result.output) {
+      el.innerHTML = `${warningHtml}<span class="console-output-text">${escapeHtml(result.output)}</span>`;
     } else {
-      el.innerHTML = `<span class="console-empty">(no output)</span>`;
+      el.innerHTML = `${warningHtml}<span class="console-empty">(no output)</span>`;
     }
   }
 
