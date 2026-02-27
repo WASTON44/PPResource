@@ -1,7 +1,7 @@
 /**
  * runner.js
  * In-browser C code execution using JSCPP (a C/C++ interpreter in JavaScript).
- * JSCPP is loaded lazily from CDN on first use.
+ * JSCPP is loaded lazily from local/vendor path with CDN fallbacks.
  *
  * Security model:
  * - JSCPP runs in the main thread (no network access by design)
@@ -12,15 +12,34 @@
  */
 
 const Runner = (() => {
-  const JSCPP_CDN = 'https://cdn.jsdelivr.net/npm/JSCPP@2.1.0/dist/JSCPP.es5.min.js';
+  const JSCPP_RUNTIME_SOURCES = [
+    // First, try same-origin file (works in strict CSP / offline deployments if vendored).
+    'assets/js/vendor/JSCPP.es5.min.js',
+    // Then fall back to public CDNs (npm-backed registries).
+    'https://cdn.jsdelivr.net/npm/jscpp@2.1.0/dist/JSCPP.es5.min.js',
+    'https://unpkg.com/jscpp@2.1.0/dist/JSCPP.es5.min.js',
+    'https://fastly.jsdelivr.net/npm/jscpp@2.1.0/dist/JSCPP.es5.min.js',
+    // GitHub-backed mirrors (useful when npm CDN domains are blocked).
+    'https://cdn.jsdelivr.net/gh/felixhao28/JSCPP@master/dist/JSCPP.es5.min.js',
+    'https://cdn.jsdelivr.net/gh/felixhao28/JSCPP@main/dist/JSCPP.es5.min.js',
+    'https://rawcdn.githack.com/felixhao28/JSCPP/master/dist/JSCPP.es5.min.js',
+    'https://rawcdn.githack.com/felixhao28/JSCPP/main/dist/JSCPP.es5.min.js'
+  ];
   const EXECUTION_TIMEOUT_MS = 5000;
 
   let _loaded = false;
   let _loading = false;
   let _loadPromise = null;
 
+
+  function _toRuntimeUrl(source) {
+    // Ensure local sources resolve correctly even when hosted under subpaths (e.g., GitHub Pages project sites).
+    if (/^https?:\/\//i.test(source)) return source;
+    return new URL(source, window.location.href).toString();
+  }
+
   /**
-   * Load JSCPP from CDN (only once).
+   * Load JSCPP runtime (only once).
    * @returns {Promise<void>}
    */
   function _loadJSCPP() {
@@ -29,18 +48,46 @@ const Runner = (() => {
 
     _loading = true;
     _loadPromise = new Promise((resolve, reject) => {
-      const script = document.createElement('script');
-      script.src = JSCPP_CDN;
-      script.onload = () => {
-        _loaded = true;
-        _loading = false;
-        resolve();
+      let currentSourceIndex = 0;
+      const triedUrls = [];
+
+      const loadFromNextSource = () => {
+        if (currentSourceIndex >= JSCPP_RUNTIME_SOURCES.length) {
+          _loading = false;
+          reject(new Error(
+            'Failed to load C runtime. Tried: ' + triedUrls.join(', ') + '. ' +
+            'If hosting on GitHub Pages, ensure assets/js/vendor/JSCPP.es5.min.js exists and is published. ' +
+            'Also allow cdn.jsdelivr.net, unpkg.com, and rawcdn.githack.com in network/CSP, then hard refresh (Ctrl/Cmd+Shift+R).'
+          ));
+          return;
+        }
+
+        const script = document.createElement('script');
+        const source = JSCPP_RUNTIME_SOURCES[currentSourceIndex++];
+        script.src = _toRuntimeUrl(source);
+        triedUrls.push(script.src);
+        script.async = true;
+
+        script.onload = () => {
+          if (typeof JSCPP === 'undefined') {
+            // Script loaded but didn't expose JSCPP; try the next source.
+            loadFromNextSource();
+            return;
+          }
+
+          _loaded = true;
+          _loading = false;
+          resolve();
+        };
+
+        script.onerror = () => {
+          loadFromNextSource();
+        };
+
+        document.head.appendChild(script);
       };
-      script.onerror = () => {
-        _loading = false;
-        reject(new Error('Failed to load C runtime. Please check your internet connection.'));
-      };
-      document.head.appendChild(script);
+
+      loadFromNextSource();
     });
 
     return _loadPromise;
