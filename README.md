@@ -89,6 +89,7 @@ If your site doesn't load assets, confirm these are true:
 - C runtime load errors ("Failed to load C runtime") usually mean your network/CSP is blocking CDN scripts.
   - Preferred fix: download `JSCPP.es5.min.js` from the JSCPP project and place it at `assets/js/vendor/JSCPP.es5.min.js` so runtime loads from your own host first.
   - Fallback: allow `cdn.jsdelivr.net`, `unpkg.com`, and `rawcdn.githack.com` in CSP/firewall rules.
+  - If npm CDNs fail, the app also tries GitHub-mirror URLs (`gh/...@master` and `gh/...@main`).
   - If you still see an older error message, do a hard refresh (`Ctrl/Cmd+Shift+R`) to clear cached JavaScript after redeploys.
 
 ## Adding New Content
