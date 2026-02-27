@@ -87,9 +87,9 @@ If your site doesn't load assets, confirm these are true:
 - Asset links stay relative (this project already uses `assets/...` paths).
 - You're not using Jekyll processing. Add an empty `.nojekyll` file in the root if needed.
 - C runtime load errors ("Failed to load C runtime") usually mean your network/CSP is blocking CDN scripts.
-  - Preferred fix: download `JSCPP.es5.min.js` from the JSCPP project and place it at `assets/js/vendor/JSCPP.es5.min.js` so runtime loads from your own host first.
-  - Fallback: allow `cdn.jsdelivr.net`, `unpkg.com`, and `rawcdn.githack.com` in CSP/firewall rules.
-  - If npm CDNs fail, the app also tries GitHub-mirror URLs (`gh/...@master` and `gh/...@main`).
+  - Preferred fix: include `assets/js/vendor/JSCPP.es5.min.js` so runtime loads from your own host first (this repo now includes that file).
+  - Fallback: allow `cdn.jsdelivr.net`, `unpkg.com`, `raw.githubusercontent.com`, and `rawcdn.githack.com` in CSP/firewall rules.
+  - If npm CDNs fail, the app also tries GitHub `gh-pages` mirror URLs.
   - If you still see an older error message, do a hard refresh (`Ctrl/Cmd+Shift+R`) to clear cached JavaScript after redeploys.
   - New: when all runtime sources are blocked, the app now falls back to a limited built-in C subset executor for beginner exercises, and shows a warning in console output.
 

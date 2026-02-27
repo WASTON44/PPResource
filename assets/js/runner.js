@@ -10,10 +10,9 @@ const Runner = (() => {
     'https://cdn.jsdelivr.net/npm/jscpp@2.1.0/dist/JSCPP.es5.min.js',
     'https://unpkg.com/jscpp@2.1.0/dist/JSCPP.es5.min.js',
     'https://fastly.jsdelivr.net/npm/jscpp@2.1.0/dist/JSCPP.es5.min.js',
-    'https://cdn.jsdelivr.net/gh/felixhao28/JSCPP@master/dist/JSCPP.es5.min.js',
-    'https://cdn.jsdelivr.net/gh/felixhao28/JSCPP@main/dist/JSCPP.es5.min.js',
-    'https://rawcdn.githack.com/felixhao28/JSCPP/master/dist/JSCPP.es5.min.js',
-    'https://rawcdn.githack.com/felixhao28/JSCPP/main/dist/JSCPP.es5.min.js'
+    'https://raw.githubusercontent.com/felixhao28/JSCPP/gh-pages/dist/JSCPP.es5.min.js',
+    'https://cdn.jsdelivr.net/gh/felixhao28/JSCPP@gh-pages/dist/JSCPP.es5.min.js',
+    'https://rawcdn.githack.com/felixhao28/JSCPP/gh-pages/dist/JSCPP.es5.min.js'
   ];
   const EXECUTION_TIMEOUT_MS = 5000;
 
@@ -41,7 +40,7 @@ const Runner = (() => {
           reject(new Error(
             'Failed to load C runtime. Tried: ' + triedUrls.join(', ') + '. ' +
             'If hosting on GitHub Pages, ensure assets/js/vendor/JSCPP.es5.min.js exists and is published. ' +
-            'Also allow cdn.jsdelivr.net, unpkg.com, and rawcdn.githack.com in network/CSP, then hard refresh (Ctrl/Cmd+Shift+R).'
+            'Also allow cdn.jsdelivr.net, unpkg.com, raw.githubusercontent.com, and rawcdn.githack.com in network/CSP, then hard refresh (Ctrl/Cmd+Shift+R).'
           ));
           return;
         }
