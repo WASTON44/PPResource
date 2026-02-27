@@ -29,6 +29,13 @@ const Runner = (() => {
   let _loading = false;
   let _loadPromise = null;
 
+
+  function _toRuntimeUrl(source) {
+    // Ensure local sources resolve correctly even when hosted under subpaths (e.g., GitHub Pages project sites).
+    if (/^https?:\/\//i.test(source)) return source;
+    return new URL(source, window.location.href).toString();
+  }
+
   /**
    * Load JSCPP runtime (only once).
    * @returns {Promise<void>}
@@ -40,20 +47,23 @@ const Runner = (() => {
     _loading = true;
     _loadPromise = new Promise((resolve, reject) => {
       let currentSourceIndex = 0;
+      const triedUrls = [];
 
       const loadFromNextSource = () => {
         if (currentSourceIndex >= JSCPP_RUNTIME_SOURCES.length) {
           _loading = false;
           reject(new Error(
-            'Failed to load C runtime. Tried local + CDN sources. ' +
-            'If you are hosting on GitHub Pages, ensure assets/js/vendor/JSCPP.es5.min.js exists ' +
-            'or allow access to jsdelivr/unpkg/rawcdn.githack in your network or CSP.'
+            'Failed to load C runtime. Tried: ' + triedUrls.join(', ') + '. ' +
+            'If hosting on GitHub Pages, ensure assets/js/vendor/JSCPP.es5.min.js exists and is published. ' +
+            'Also allow jsdelivr/unpkg/rawcdn.githack in network or CSP, then hard refresh (Ctrl/Cmd+Shift+R).'
           ));
           return;
         }
 
         const script = document.createElement('script');
-        script.src = JSCPP_RUNTIME_SOURCES[currentSourceIndex++];
+        const source = JSCPP_RUNTIME_SOURCES[currentSourceIndex++];
+        script.src = _toRuntimeUrl(source);
+        triedUrls.push(script.src);
         script.async = true;
 
         script.onload = () => {
