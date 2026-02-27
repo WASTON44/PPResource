@@ -91,6 +91,7 @@ If your site doesn't load assets, confirm these are true:
   - Fallback: allow `cdn.jsdelivr.net`, `unpkg.com`, and `rawcdn.githack.com` in CSP/firewall rules.
   - If npm CDNs fail, the app also tries GitHub-mirror URLs (`gh/...@master` and `gh/...@main`).
   - If you still see an older error message, do a hard refresh (`Ctrl/Cmd+Shift+R`) to clear cached JavaScript after redeploys.
+  - New: when all runtime sources are blocked, the app now falls back to a limited built-in C subset executor for beginner exercises, and shows a warning in console output.
 
 ## Adding New Content
 
