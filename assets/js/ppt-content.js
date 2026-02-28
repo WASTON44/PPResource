@@ -58,11 +58,11 @@
       guide: "Use this as your baseline program shape.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     printf("Hello, World!\\n");
     return 0;
 }`,
-      syntax: [["int main(void)", "Entry point."], ["return 0;", "Successful completion."]],
+      syntax: [["int main()", "Entry point."], ["return 0;", "Successful completion."]],
       takeaways: ["Small compile-run loops are the fastest way to improve."],
       quiz1: {
         title: "Knowledge Check",
@@ -76,7 +76,7 @@ int main(void) {
         instructions: "<p>Print exactly:</p><pre>Welcome to C\nLet's code.</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     printf("Welcome to C\\n");
     printf("Let's code.\\n");
     return 0;
@@ -103,7 +103,7 @@ int main(void) {
       guide: "This print pattern appears in almost every beginner exercise.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int age = 19;
     float avg = 72.5f;
     printf("Age: %d\\n", age);
@@ -124,7 +124,7 @@ int main(void) {
         instructions: "<p>Print exactly:</p><pre>Name: Alex\nAge: 19\nAverage: 72.5</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     char name[] = "Alex";
     int age = 19;
     float average = 72.5f;
@@ -156,7 +156,7 @@ int main(void) {
       guide: "Range checking with else-if is a standard pattern.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int score = 74;
     if (score >= 80) printf("A\\n");
     else if (score >= 70) printf("B\\n");
@@ -177,7 +177,7 @@ int main(void) {
         instructions: "<p>With score=68, print Distinction (>=70), Merit (>=60), or Pass.</p>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int score = 68;
     if (score >= 70) printf("Distinction\\n");
     else if (score >= 60) printf("Merit\\n");
@@ -206,7 +206,7 @@ int main(void) {
       guide: "Counting and totals are core loop applications.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     for (int i = 1; i <= 5; i++) {
         printf("%d\\n", i);
     }
@@ -226,7 +226,7 @@ int main(void) {
         instructions: "<p>Sum 1 to 5 and print:</p><pre>Total: 15</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int total = 0;
     for (int i = 1; i <= 5; i++) total += i;
     printf("Total: %d\\n", total);
@@ -254,7 +254,7 @@ int main(void) {
       guide: "The same process scales from labs to production systems.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     printf("Plan\\n");
     printf("Design\\n");
     printf("Implement\\n");
@@ -275,7 +275,7 @@ int main(void) {
         instructions: "<p>Print exactly:</p><pre>Plan\nDesign\nImplement\nTest</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     printf("Plan\\n");
     printf("Design\\n");
     printf("Implement\\n");
@@ -304,7 +304,7 @@ int main(void) {
       guide: "One cast can change output significantly.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int a = 7, b = 2;
     double r = (double)a / b;
     printf("Result: %.2f\\n", r);
@@ -324,7 +324,7 @@ int main(void) {
         instructions: "<p>Compute average of 9 and 4 and print:</p><pre>Average: 6.50</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int x = 9, y = 4;
     double avg = (double)(x + y) / 2;
     printf("Average: %.2f\\n", avg);
@@ -352,7 +352,7 @@ int main(void) {
       guide: "Array traversal underpins many data-processing tasks.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int a[4] = {3, 6, 9, 12};
     for (int i = 0; i < 4; i++) printf("%d\\n", a[i]);
     return 0;
@@ -371,7 +371,7 @@ int main(void) {
         instructions: "<p>Sum values and print:</p><pre>Sum: 30</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int nums[5] = {2, 4, 6, 8, 10};
     int sum = 0;
     for (int i = 0; i < 5; i++) sum += nums[i];
@@ -400,7 +400,7 @@ int main(void) {
       guide: "String handling reuses array and character fundamentals.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     char topic[] = "Strings";
     printf("Topic: %s\\n", topic);
     printf("First: %c\\n", topic[0]);
@@ -420,7 +420,7 @@ int main(void) {
         instructions: "<p>Print exactly:</p><pre>Topic: Strings\nFirst: S</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     char topic[] = "Strings";
     printf("Topic: %s\\n", topic);
     printf("First: %c\\n", topic[0]);
@@ -452,7 +452,7 @@ int square(int n) {
     return n * n;
 }
 
-int main(void) {
+int main() {
     printf("%d\\n", square(4));
     return 0;
 }`,
@@ -474,7 +474,7 @@ int cube(int n) {
     return n * n * n;
 }
 
-int main(void) {
+int main() {
     int result = cube(3);
     printf("Cube: %d\\n", result);
     return 0;
@@ -501,7 +501,7 @@ int main(void) {
       guide: "Pointer basics are foundational for advanced C topics.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int value = 25;
     int *p = &value;
     printf("Value: %d\\n", *p);
@@ -521,7 +521,7 @@ int main(void) {
         instructions: "<p>Increase value by 5 through pointer and print:</p><pre>Value: 15</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     int value = 10;
     int *p = &value;
     *p = *p + 5;
@@ -555,7 +555,7 @@ struct Student {
     int id;
 };
 
-int main(void) {
+int main() {
     struct Student s = {"Mina", 1024};
     printf("%s %d\\n", s.name, s.id);
     return 0;
@@ -579,7 +579,7 @@ struct Point {
     int y;
 };
 
-int main(void) {
+int main() {
     struct Point p = {3, 4};
     printf("Point: (%d, %d)\\n", p.x, p.y);
     return 0;
@@ -606,7 +606,7 @@ int main(void) {
       guide: "This is the conceptual baseline before full file labs.",
       example: `#include <stdio.h>
 
-int main(void) {
+int main() {
     FILE *fp = fopen("notes.txt", "w");
     if (fp == NULL) return 1;
     fprintf(fp, "Hello\\n");
@@ -627,7 +627,7 @@ int main(void) {
         instructions: "<p>Print exactly:</p><pre>Open\nRead/Write\nClose</pre>",
         starter: `#include <stdio.h>
 
-int main(void) {
+int main() {
     printf("Open\\n");
     printf("Read/Write\\n");
     printf("Close\\n");
