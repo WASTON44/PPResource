@@ -13,13 +13,13 @@ An interactive, step-by-step C programming course that runs **fully in the brows
 - **Progress Persistence** — localStorage-based resume on refresh
 - **No Server Required** — Fully static HTML/CSS/JS
 
-## Course Content (MVP)
+## Course Content (Current)
 
 | Module | Lessons | Steps | Code Exercises |
 |--------|---------|-------|----------------|
-| Module 1: C Basics | Hello World, printf, Variables | 12 | 4 |
-| Module 2: Control Flow | if/else, Loops | 8 | 3 |
-| **Total** | | **20** | **7** |
+| Module 1: C Foundations | First Program, printf, Variables/Expressions | 22 | 8 |
+| Module 2: Control Flow and Repetition | Decisions, Loops, switch/break/continue | 20 | 8 |
+| **Total** | **6** | **42** | **16** |
 
 ## Project Structure
 
@@ -92,6 +92,10 @@ If your site doesn't load assets, confirm these are true:
   - If npm CDNs fail, the app also tries GitHub `gh-pages` mirror URLs.
   - If you still see an older error message, do a hard refresh (`Ctrl/Cmd+Shift+R`) to clear cached JavaScript after redeploys.
   - New: when all runtime sources are blocked, the app now falls back to a limited built-in C subset executor for beginner exercises, and shows a warning in console output.
+
+### Pages Redeploy Marker
+
+This README was updated on **2026-03-05** to force a new commit on `main` and trigger a fresh GitHub Pages publish.
 
 ## Adding New Content
 
