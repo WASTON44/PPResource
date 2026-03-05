@@ -1,163 +1,200 @@
 /**
  * course-data.js
- * All course content defined as data — no code changes needed to add lessons.
- * Schema: modules[] → lessons[] → steps[]
+ * All course content defined as data - no code changes needed to add lessons.
+ * Schema: modules[] -> lessons[] -> steps[]
  * Step types: "content" | "quiz" | "code"
  */
 
 const COURSE_DATA = {
   title: "Introduction to C Programming",
   subtitle: "A structured, hands-on course for absolute beginners",
-  version: "1.0.0",
+  version: "1.1.0",
   modules: [
     {
       id: "m1",
-      title: "Module 1: C Basics",
-      icon: "🔵",
+      title: "Module 1: C Foundations",
+      icon: "M1",
       lessons: [
         {
           id: "m1l1",
-          title: "Lesson 1: Your First C Program",
+          title: "Lesson 1: First Program and Build Workflow",
           steps: [
             {
               id: "m1l1s1",
               type: "content",
-              title: "What is C?",
+              title: "What C Is and Why It Matters",
               body: `
-                <h2>What is the C Programming Language?</h2>
-                <p>C is a <strong>general-purpose programming language</strong> created in the early 1970s. It remains one of the most widely used languages in the world today, powering everything from operating systems to embedded devices.</p>
-                <h3>Why learn C?</h3>
+                <h2>Why learn C?</h2>
+                <p>C is a general-purpose language designed for performance, portability, and control over memory. It is still widely used in operating systems, embedded firmware, networking tools, and performance-sensitive software.</p>
+                <h3>Skills you build in C</h3>
                 <ul>
-                  <li>🔧 <strong>Foundational</strong> — Understanding C makes learning other languages (Java, Python, C++) much easier</li>
-                  <li>⚡ <strong>Fast</strong> — C programs run close to the hardware, making them extremely efficient</li>
-                  <li>🖥️ <strong>Universal</strong> — Used in operating systems (Linux, Windows), embedded systems, and game engines</li>
-                  <li>💡 <strong>Teaches fundamentals</strong> — Memory management, data types, and algorithms all make sense in C</li>
+                  <li>Precise thinking about data types and memory</li>
+                  <li>Understanding how source code becomes executable machine code</li>
+                  <li>Control flow and debugging habits that transfer to other languages</li>
                 </ul>
-                <blockquote>
-                  <p>"C is quirky, flawed, and an enormous success." — Dennis Ritchie, creator of C</p>
-                </blockquote>
-                <p>In this course you will write, compile, and run real C programs — all inside your browser, no installation needed.</p>
+                <div class="info-box">
+                  <strong>Key takeaway:</strong> C is compact as a language, but deep in what it teaches.
+                </div>
               `
             },
             {
               id: "m1l1s2",
               type: "content",
-              title: "Program Structure",
+              title: "From Source Code to Running Program",
               body: `
-                <h2>The Structure of a C Program</h2>
-                <p>Every C program follows the same basic structure. Let's break it down:</p>
-                <pre><code>#include &lt;stdio.h&gt;
-
-int main() {
-    // Your code goes here
-    return 0;
-}</code></pre>
+                <h2>The C Build Pipeline</h2>
+                <p>When you click Run, several stages happen behind the scenes:</p>
                 <table class="info-table">
-                  <thead><tr><th>Part</th><th>Meaning</th></tr></thead>
+                  <thead><tr><th>Stage</th><th>What happens</th><th>Typical output</th></tr></thead>
                   <tbody>
-                    <tr><td><code>#include &lt;stdio.h&gt;</code></td><td>Imports the standard input/output library so we can use <code>printf</code></td></tr>
-                    <tr><td><code>int main()</code></td><td>The entry point — every C program starts here</td></tr>
-                    <tr><td><code>{ ... }</code></td><td>Curly braces mark the start and end of a block of code</td></tr>
-                    <tr><td><code>return 0;</code></td><td>Tells the operating system the program finished successfully</td></tr>
-                    <tr><td><code>// comment</code></td><td>A comment — the compiler ignores it, it's for humans to read</td></tr>
+                    <tr><td>Preprocessing</td><td>Expands <code>#include</code> and macros</td><td>Expanded source</td></tr>
+                    <tr><td>Compilation</td><td>Transforms C code to assembly</td><td><code>.s</code> file</td></tr>
+                    <tr><td>Assembly</td><td>Transforms assembly to object code</td><td><code>.o</code> file</td></tr>
+                    <tr><td>Linking</td><td>Combines objects and libraries into one executable</td><td>Program binary</td></tr>
                   </tbody>
                 </table>
-                <div class="info-box">
-                  <strong>📌 Key Rule:</strong> Every statement in C ends with a semicolon <code>;</code>. Forgetting one is one of the most common beginner mistakes!
-                </div>
+                <p>If any stage fails, the program does not run. Reading compiler errors is part of normal development.</p>
               `
             },
             {
               id: "m1l1s3",
-              type: "quiz",
-              title: "Knowledge Check",
-              question: "What does <code>return 0;</code> at the end of <code>main()</code> indicate?",
-              options: [
-                "The program found zero errors",
-                "The program finished successfully and returned status code 0 to the OS",
-                "The main function returns the number zero as a value to display",
-                "It resets the program counter to the beginning"
-              ],
-              correct: 1,
-              explanation: "Correct! By convention, returning 0 from <code>main()</code> tells the operating system that the program completed without errors. Any non-zero return value indicates an error condition."
+              type: "content",
+              title: "Program Anatomy",
+              body: `
+                <h2>Structure of a minimal C program</h2>
+                <pre><code>#include &lt;stdio.h&gt;
+
+int main(void) {
+    printf("Hello, World!\\n");
+    return 0;
+}</code></pre>
+                <table class="info-table">
+                  <thead><tr><th>Part</th><th>Role</th></tr></thead>
+                  <tbody>
+                    <tr><td><code>#include &lt;stdio.h&gt;</code></td><td>Declares standard input/output functions like <code>printf</code></td></tr>
+                    <tr><td><code>int main(void)</code></td><td>Entry point where execution begins</td></tr>
+                    <tr><td><code>{ ... }</code></td><td>Block boundaries for function body</td></tr>
+                    <tr><td><code>return 0;</code></td><td>Exit status indicating success</td></tr>
+                  </tbody>
+                </table>
+                <div class="warning-box">
+                  <strong>Common mistake:</strong> every statement must end with a semicolon.
+                </div>
+              `
             },
             {
               id: "m1l1s4",
+              type: "quiz",
+              title: "Knowledge Check: return value",
+              question: "What does <code>return 0;</code> at the end of <code>main()</code> mean?",
+              options: [
+                "Print the number 0 to the terminal",
+                "Program completed successfully",
+                "Reset all variables to 0",
+                "Skip the rest of the program"
+              ],
+              correct: 1,
+              explanation: "Correct. By convention, 0 means successful execution and non-zero values indicate errors."
+            },
+            {
+              id: "m1l1s5",
               type: "code",
-              title: "Exercise: Hello, World!",
+              title: "Exercise: Hello, World",
               instructions: `
-                <p>It's time to write your first C program! The classic first program in any language prints <strong>Hello, World!</strong> to the screen.</p>
-                <p>The code is already written for you. Click <strong>Run Code</strong> to see it execute, then read the output in the console below.</p>
-                <p>Once you've run it successfully, try changing the message inside the quotes to something else and run it again!</p>
+                <p>Run the starter code once, then personalize the greeting text while keeping the same program structure.</p>
+                <p>Your output only needs to include <strong>Hello, World!</strong> somewhere to pass this first exercise.</p>
               `,
               starter_code: `#include <stdio.h>
 
-int main() {
+int main(void) {
     printf("Hello, World!\\n");
     return 0;
 }`,
               expected_output: "Hello, World!",
               check_mode: "contains",
-              hint: "Make sure you have #include <stdio.h> at the top. The \\n inside the string creates a new line.",
-              completion_message: "🎉 Excellent! You've run your first C program! Notice how printf() sends text to the screen, and \\n moves the cursor to a new line."
+              hint: "Keep #include <stdio.h> and return 0; exactly as shown.",
+              completion_message: "Great start. You compiled and ran your first C program."
             },
             {
-              id: "m1l1s5",
+              id: "m1l1s6",
               type: "quiz",
               title: "Predict the Output",
               question: `What will this program print?
 <pre><code>#include &lt;stdio.h&gt;
-int main() {
-    printf("Line 1\\n");
-    printf("Line 2\\n");
+int main(void) {
+    printf("C\\n");
+    printf("Course\\n");
     return 0;
 }</code></pre>`,
               options: [
-                "Line 1 Line 2 (on one line)",
-                "Line 1\nLine 2 (on two separate lines)",
-                "Line1\nLine2",
-                "The program will not compile"
+                "CCourse",
+                "C on first line, Course on second line",
+                "Course on first line, C on second line",
+                "Compilation error"
               ],
               correct: 1,
-              explanation: "Correct! Each <code>printf()</code> call prints its text, and the <code>\\n</code> at the end of each string causes a new line. So \"Line 1\" appears on the first line and \"Line 2\" on the second."
+              explanation: "Each printf call prints once, and each string ends with a newline."
+            },
+            {
+              id: "m1l1s7",
+              type: "code",
+              title: "Exercise: Build Status Banner",
+              instructions: `
+                <p>Complete the second <code>printf</code> so the program prints:</p>
+                <pre>Build started
+Build complete</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    printf("Build started\\n");
+    // Add one printf below for "Build complete"
+
+    return 0;
+}`,
+              expected_output: "Build started\nBuild complete",
+              check_mode: "exact",
+              hint: "Add: printf(\"Build complete\\n\");",
+              completion_message: "Nice. You can now produce multi-line output reliably."
+            },
+            {
+              id: "m1l1s8",
+              type: "quiz",
+              title: "Knowledge Check: header usage",
+              question: "Why do we include <code>stdio.h</code> in these examples?",
+              options: [
+                "To use printf declarations",
+                "To enable loops",
+                "To define int",
+                "To make the compiler faster"
+              ],
+              correct: 0,
+              explanation: "Correct. stdio.h provides declarations for standard input/output functions including printf."
             }
           ]
         },
         {
           id: "m1l2",
-          title: "Lesson 2: Displaying Output",
+          title: "Lesson 2: Displaying Output with printf",
           steps: [
             {
               id: "m1l2s1",
               type: "content",
-              title: "The printf() Function",
+              title: "printf Basics and Format Specifiers",
               body: `
-                <h2>Displaying Output with printf()</h2>
-                <p>The <code>printf()</code> function is your main tool for displaying information. It stands for <em>print formatted</em>.</p>
-                <h3>Basic Usage</h3>
-                <pre><code>printf("Your text here\\n");</code></pre>
-                <h3>Escape Sequences</h3>
-                <p>Inside a string, special characters are written with a backslash:</p>
+                <h2>Formatted output with <code>printf</code></h2>
+                <p><code>printf</code> can print plain text and values from variables in one statement.</p>
+                <pre><code>int age = 27;
+float score = 93.5f;
+printf("Age: %d, Score: %.1f\\n", age, score);</code></pre>
                 <table class="info-table">
-                  <thead><tr><th>Sequence</th><th>Effect</th></tr></thead>
+                  <thead><tr><th>Specifier</th><th>Data type</th><th>Example output</th></tr></thead>
                   <tbody>
-                    <tr><td><code>\\n</code></td><td>New line</td></tr>
-                    <tr><td><code>\\t</code></td><td>Tab (indent)</td></tr>
-                    <tr><td><code>\\\\</code></td><td>Literal backslash</td></tr>
-                    <tr><td><code>\\"</code></td><td>Literal double quote</td></tr>
-                  </tbody>
-                </table>
-                <h3>Format Specifiers</h3>
-                <p>You can embed variables in your output using <strong>format specifiers</strong>:</p>
-                <pre><code>int age = 25;
-printf("I am %d years old.\\n", age);</code></pre>
-                <table class="info-table">
-                  <thead><tr><th>Specifier</th><th>Type</th><th>Example</th></tr></thead>
-                  <tbody>
-                    <tr><td><code>%d</code></td><td>Integer</td><td><code>printf("%d", 42);</code> → <em>42</em></td></tr>
-                    <tr><td><code>%f</code></td><td>Float/Double</td><td><code>printf("%f", 3.14);</code> → <em>3.140000</em></td></tr>
-                    <tr><td><code>%s</code></td><td>String</td><td><code>printf("%s", "hello");</code> → <em>hello</em></td></tr>
-                    <tr><td><code>%c</code></td><td>Character</td><td><code>printf("%c", 'A');</code> → <em>A</em></td></tr>
+                    <tr><td><code>%d</code></td><td>int</td><td>42</td></tr>
+                    <tr><td><code>%f</code></td><td>float/double</td><td>3.140000</td></tr>
+                    <tr><td><code>%.2f</code></td><td>float/double with precision</td><td>3.14</td></tr>
+                    <tr><td><code>%c</code></td><td>char</td><td>A</td></tr>
+                    <tr><td><code>%s</code></td><td>char array string</td><td>Hello</td></tr>
                   </tbody>
                 </table>
               `
@@ -165,80 +202,153 @@ printf("I am %d years old.\\n", age);</code></pre>
             {
               id: "m1l2s2",
               type: "code",
-              title: "Exercise: Formatted Output",
+              title: "Exercise: Intro Card",
               instructions: `
-                <p>Modify the program below to print a short introduction in this exact format:</p>
+                <p>Print this exact three-line card:</p>
                 <pre>Name: Ada Lovelace
 Age: 27
 Language: C</pre>
-                <p>Each item should be on its own line. Use the starter code as your base and fill in the <code>printf()</code> statements.</p>
               `,
               starter_code: `#include <stdio.h>
 
-int main() {
+int main(void) {
     printf("Name: Ada Lovelace\\n");
-    // Add two more printf statements below:
-    // print "Age: 27"
-    // print "Language: C"
-    
+    // Add two printf lines below
+
     return 0;
 }`,
               expected_output: "Name: Ada Lovelace\nAge: 27\nLanguage: C",
               check_mode: "exact",
-              hint: "Add printf(\"Age: 27\\n\"); and printf(\"Language: C\\n\"); after the first printf.",
-              completion_message: "✅ Well done! You've used multiple printf() calls to display formatted output."
+              hint: "Print Age on one line and Language on the next line.",
+              completion_message: "Well done. You composed multi-line output correctly."
             },
             {
               id: "m1l2s3",
               type: "quiz",
-              title: "Knowledge Check: Format Specifiers",
-              question: "Which format specifier should you use to print a <strong>decimal integer</strong> with <code>printf()</code>?",
+              title: "Knowledge Check: integer specifier",
+              question: "Which format specifier prints a decimal integer?",
               options: [
-                "%s",
                 "%f",
+                "%c",
                 "%d",
-                "%c"
+                "%s"
               ],
               correct: 2,
-              explanation: "Correct! <code>%d</code> is used for decimal (base-10) integers. Use <code>%f</code> for floating-point numbers, <code>%s</code> for strings, and <code>%c</code> for single characters."
+              explanation: "Correct. %d prints signed decimal integers."
+            },
+            {
+              id: "m1l2s4",
+              type: "content",
+              title: "Escape Sequences, Width, and Precision",
+              body: `
+                <h2>Controlling text layout</h2>
+                <p>Use escape sequences and format controls for readable output.</p>
+                <table class="info-table">
+                  <thead><tr><th>Token</th><th>Effect</th><th>Example</th></tr></thead>
+                  <tbody>
+                    <tr><td><code>\\n</code></td><td>New line</td><td>line break</td></tr>
+                    <tr><td><code>\\t</code></td><td>Tab spacing</td><td>column alignment</td></tr>
+                    <tr><td><code>%.1f</code></td><td>1 decimal place</td><td>92.5</td></tr>
+                    <tr><td><code>%6d</code></td><td>minimum width 6</td><td>right-aligned integer</td></tr>
+                  </tbody>
+                </table>
+                <pre><code>float completion = 92.5f;
+printf("Completion: %.1f%%\\n", completion);</code></pre>
+                <p>To print a literal percent sign, write <code>%%</code>.</p>
+              `
+            },
+            {
+              id: "m1l2s5",
+              type: "code",
+              title: "Exercise: Mini Report",
+              instructions: `
+                <p>Use the variables provided and print this exact output:</p>
+                <pre>Bugs Open: 4
+Coverage: 92.5%
+Release Grade: A</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    int bugs = 4;
+    float coverage = 92.5f;
+    char grade = 'A';
+
+    // Print the report lines here
+
+    return 0;
+}`,
+              expected_output: "Bugs Open: 4\nCoverage: 92.5%\nRelease Grade: A",
+              check_mode: "exact",
+              hint: "Use %d for bugs, %.1f%% for coverage, and %c for grade.",
+              completion_message: "Nice. You used multiple format specifiers in one report."
+            },
+            {
+              id: "m1l2s6",
+              type: "quiz",
+              title: "Knowledge Check: escape sequences",
+              question: "Which escape sequence inserts a horizontal tab in a string literal?",
+              options: [
+                "\\n",
+                "\\t",
+                "\\\\",
+                "\\\""
+              ],
+              correct: 1,
+              explanation: "Correct. \\t inserts a tab character."
+            },
+            {
+              id: "m1l2s7",
+              type: "code",
+              title: "Exercise: Item Lines with Values",
+              instructions: `
+                <p>Print the following output using the variables provided:</p>
+                <pre>Item: Keyboard, Qty: 3
+Item: Mouse, Qty: 5</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    char item1[] = "Keyboard";
+    char item2[] = "Mouse";
+    int qty1 = 3;
+    int qty2 = 5;
+
+    // Print two lines in the required format
+
+    return 0;
+}`,
+              expected_output: "Item: Keyboard, Qty: 3\nItem: Mouse, Qty: 5",
+              check_mode: "exact",
+              hint: "Use %s for item names and %d for quantities.",
+              completion_message: "Great. You combined string and integer placeholders cleanly."
             }
           ]
         },
         {
           id: "m1l3",
-          title: "Lesson 3: Variables and Data Types",
+          title: "Lesson 3: Variables, Types, and Expressions",
           steps: [
             {
               id: "m1l3s1",
               type: "content",
-              title: "Variables and Data Types",
+              title: "Declaring and Naming Variables",
               body: `
-                <h2>Storing Data: Variables</h2>
-                <p>A <strong>variable</strong> is a named location in memory that stores a value. Before you can use a variable in C, you must <em>declare</em> it by specifying its <strong>type</strong> and <strong>name</strong>.</p>
-                <pre><code>int age = 25;
-float price = 9.99;
-char grade = 'A';
-</code></pre>
-                <h3>Common Data Types</h3>
+                <h2>Variables and data types</h2>
+                <p>A variable is a named storage location. In C, you must declare it before use.</p>
+                <pre><code>int count = 10;
+float temperature = 36.6f;
+char grade = 'A';</code></pre>
                 <table class="info-table">
-                  <thead><tr><th>Type</th><th>Stores</th><th>Example</th><th>Size</th></tr></thead>
+                  <thead><tr><th>Type</th><th>Use case</th><th>Typical size</th></tr></thead>
                   <tbody>
-                    <tr><td><code>int</code></td><td>Whole numbers</td><td><code>int count = 10;</code></td><td>4 bytes</td></tr>
-                    <tr><td><code>float</code></td><td>Decimal numbers (single precision)</td><td><code>float pi = 3.14f;</code></td><td>4 bytes</td></tr>
-                    <tr><td><code>double</code></td><td>Decimal numbers (double precision)</td><td><code>double e = 2.718;</code></td><td>8 bytes</td></tr>
-                    <tr><td><code>char</code></td><td>A single character</td><td><code>char c = 'X';</code></td><td>1 byte</td></tr>
+                    <tr><td><code>int</code></td><td>whole numbers</td><td>4 bytes</td></tr>
+                    <tr><td><code>float</code></td><td>decimal values</td><td>4 bytes</td></tr>
+                    <tr><td><code>double</code></td><td>higher precision decimal</td><td>8 bytes</td></tr>
+                    <tr><td><code>char</code></td><td>single character</td><td>1 byte</td></tr>
                   </tbody>
                 </table>
-                <h3>Naming Rules</h3>
-                <ul>
-                  <li>Must start with a letter or underscore (<code>_</code>)</li>
-                  <li>Can contain letters, digits, and underscores</li>
-                  <li>Case-sensitive: <code>age</code> and <code>Age</code> are different variables</li>
-                  <li>Cannot use reserved keywords like <code>int</code>, <code>return</code>, <code>for</code></li>
-                </ul>
-                <div class="info-box">
-                  <strong>💡 Best Practice:</strong> Use descriptive names like <code>studentAge</code> rather than <code>x</code>. Your future self will thank you!
-                </div>
+                <p>Use clear names like <code>studentScore</code> instead of one-letter names.</p>
               `
             },
             {
@@ -246,79 +356,127 @@ char grade = 'A';
               type: "code",
               title: "Exercise: Declare and Print Variables",
               instructions: `
-                <p>Complete the program to declare three variables and print them. Your output should be:</p>
+                <p>Complete the program to print this exact output:</p>
                 <pre>Score: 95
 Temperature: 36.6
 Grade: A</pre>
-                <p>Declare:</p>
-                <ul>
-                  <li>An <code>int</code> variable called <code>score</code> with value <code>95</code></li>
-                  <li>A <code>float</code> variable called <code>temp</code> with value <code>36.6</code></li>
-                  <li>A <code>char</code> variable called <code>grade</code> with value <code>'A'</code></li>
-                </ul>
               `,
               starter_code: `#include <stdio.h>
 
-int main() {
-    // Declare your variables here
+int main(void) {
     int score = 95;
-    // Add float temp and char grade below:
-    
+    // Add temp and grade declarations
+
     printf("Score: %d\\n", score);
-    // Add printf for temp (use %.1f for 1 decimal place)
-    // Add printf for grade (use %c)
-    
+    // Add print lines for temperature and grade
+
     return 0;
 }`,
               expected_output: "Score: 95\nTemperature: 36.6\nGrade: A",
               check_mode: "exact",
-              hint: "Use 'float temp = 36.6f;' and 'char grade = \\'A\\';'. For printf, use '%.1f' for one decimal place and '%c' for a character.",
-              completion_message: "🌟 Perfect! You've used three different data types. Notice how different format specifiers match different types."
+              hint: "Use float temp = 36.6f; char grade = 'A'; and print temp with %.1f.",
+              completion_message: "Perfect. You matched variable types to format specifiers."
             },
             {
               id: "m1l3s3",
               type: "quiz",
-              title: "Knowledge Check: Data Types",
-              question: "A student's GPA is <strong>3.85</strong>. Which C data type is most appropriate to store it?",
+              title: "Knowledge Check: decimal value",
+              question: "A GPA value like 3.85 should be stored in which type?",
               options: [
-                "int — because grades are numeric",
-                "char — because it's a short value",
-                "float — because it's a decimal number",
-                "string — because it looks like text"
+                "int",
+                "char",
+                "float",
+                "void"
               ],
               correct: 2,
-              explanation: "Correct! <code>float</code> (or <code>double</code> for more precision) is the right choice for decimal numbers. <code>int</code> only stores whole numbers — using it would truncate 3.85 to just 3. There is no <code>string</code> type built into C."
+              explanation: "Correct. Decimal values need float or double, not int."
             },
             {
               id: "m1l3s4",
+              type: "content",
+              title: "Expressions, Constants, and Conversions",
+              body: `
+                <h2>Arithmetic and conversion behavior</h2>
+                <p>C supports standard operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and <code>%</code>.</p>
+                <h3>Important rule: integer division</h3>
+                <pre><code>int a = 7;
+int b = 2;
+printf("%d\\n", a / b);   // prints 3</code></pre>
+                <p>For decimal division, convert at least one operand:</p>
+                <pre><code>printf("%.2f\\n", (float)a / b); // prints 3.50</code></pre>
+                <h3>Constants</h3>
+                <pre><code>const float TAX_RATE = 0.20f;</code></pre>
+                <p>Use <code>const</code> when values should not be modified after initialization.</p>
+              `
+            },
+            {
+              id: "m1l3s5",
               type: "code",
-              title: "Exercise: Arithmetic",
+              title: "Exercise: Arithmetic Results",
               instructions: `
-                <p>C can perform arithmetic using standard operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and <code>%</code> (modulo — gives the remainder).</p>
-                <p>Complete the program so it prints:</p>
+                <p>Given <code>a = 8</code> and <code>b = 5</code>, print:</p>
                 <pre>Sum: 13
 Product: 40
 Remainder: 3</pre>
-                <p>Given: <code>a = 8</code> and <code>b = 5</code></p>
               `,
               starter_code: `#include <stdio.h>
 
-int main() {
+int main(void) {
     int a = 8;
     int b = 5;
-    
+
     int sum = a + b;
-    // Calculate product (a * b) and remainder (a % b)
-    
+    // Add product and remainder variables
+
     printf("Sum: %d\\n", sum);
     // Print product and remainder
-    
+
     return 0;
 }`,
               expected_output: "Sum: 13\nProduct: 40\nRemainder: 3",
               check_mode: "exact",
-              hint: "Add 'int product = a * b;' and 'int remainder = a % b;', then add the corresponding printf statements.",
-              completion_message: "🔢 Great arithmetic! The % operator gives the remainder — 8 % 5 = 3 because 8 = 5×1 + 3."
+              hint: "Use a * b for product and a % b for remainder.",
+              completion_message: "Good work. You used arithmetic operators accurately."
+            },
+            {
+              id: "m1l3s6",
+              type: "code",
+              title: "Exercise: Force Decimal Division",
+              instructions: `
+                <p>Make the program print exactly:</p>
+                <pre>Result: 3.50</pre>
+                <p>Use casting so the division is not truncated.</p>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    int a = 7;
+    int b = 2;
+
+    // Compute decimal result with casting
+    float result = 0.0f;
+
+    printf("Result: %.2f\\n", result);
+    return 0;
+}`,
+              expected_output: "Result: 3.50",
+              check_mode: "exact",
+              hint: "Assign result as: (float)a / b;",
+              completion_message: "Excellent. You correctly handled integer-to-float conversion."
+            },
+            {
+              id: "m1l3s7",
+              type: "quiz",
+              title: "Knowledge Check: integer division",
+              question: "What is the result of <code>7 / 2</code> when both operands are <code>int</code>?",
+              options: [
+                "3",
+                "3.5",
+                "4",
+                "Compiler error"
+              ],
+              correct: 0,
+              explanation: "Correct. Integer division truncates the fractional part."
             }
           ]
         }
@@ -326,51 +484,39 @@ int main() {
     },
     {
       id: "m2",
-      title: "Module 2: Control Flow",
-      icon: "🟢",
+      title: "Module 2: Control Flow and Repetition",
+      icon: "M2",
       lessons: [
         {
           id: "m2l1",
-          title: "Lesson 1: Making Decisions",
+          title: "Lesson 1: Decision Making with if and else",
           steps: [
             {
               id: "m2l1s1",
               type: "content",
-              title: "if / else Statements",
+              title: "if, else if, and else",
               body: `
-                <h2>Making Decisions: if / else</h2>
-                <p>Programs often need to <strong>make decisions</strong> — executing different code depending on conditions. C uses <code>if</code>, <code>else if</code>, and <code>else</code> for this.</p>
-                <h3>Syntax</h3>
-                <pre><code>if (condition) {
-    // runs if condition is true
-} else if (other_condition) {
-    // runs if other_condition is true
+                <h2>Branching logic</h2>
+                <p>Decision statements allow different code paths based on conditions.</p>
+                <pre><code>if (score >= 90) {
+    printf("A\\n");
+} else if (score >= 80) {
+    printf("B\\n");
 } else {
-    // runs if none of the above are true
+    printf("Needs improvement\\n");
 }</code></pre>
-                <h3>Comparison Operators</h3>
                 <table class="info-table">
-                  <thead><tr><th>Operator</th><th>Meaning</th><th>Example</th></tr></thead>
+                  <thead><tr><th>Operator</th><th>Meaning</th></tr></thead>
                   <tbody>
-                    <tr><td><code>==</code></td><td>Equal to</td><td><code>x == 5</code></td></tr>
-                    <tr><td><code>!=</code></td><td>Not equal to</td><td><code>x != 0</code></td></tr>
-                    <tr><td><code>&gt;</code></td><td>Greater than</td><td><code>x &gt; 10</code></td></tr>
-                    <tr><td><code>&lt;</code></td><td>Less than</td><td><code>x &lt; 10</code></td></tr>
-                    <tr><td><code>&gt;=</code></td><td>Greater than or equal</td><td><code>x &gt;= 18</code></td></tr>
-                    <tr><td><code>&lt;=</code></td><td>Less than or equal</td><td><code>x &lt;= 100</code></td></tr>
+                    <tr><td><code>==</code></td><td>equal to</td></tr>
+                    <tr><td><code>!=</code></td><td>not equal</td></tr>
+                    <tr><td><code>&gt;</code>, <code>&lt;</code></td><td>greater/less than</td></tr>
+                    <tr><td><code>&gt;=</code>, <code>&lt;=</code></td><td>inclusive comparisons</td></tr>
                   </tbody>
                 </table>
                 <div class="warning-box">
-                  <strong>⚠️ Common Mistake:</strong> Don't confuse <code>=</code> (assignment) with <code>==</code> (comparison)!
-                  Writing <code>if (x = 5)</code> sets x to 5 (always true). You want <code>if (x == 5)</code>.
+                  <strong>Watch out:</strong> <code>=</code> assigns a value, while <code>==</code> compares values.
                 </div>
-                <h3>Example: Grade Classifier</h3>
-                <pre><code>int score = 72;
-if (score >= 70) {
-    printf("Pass\\n");
-} else {
-    printf("Fail\\n");
-}</code></pre>
               `
             },
             {
@@ -378,37 +524,30 @@ if (score >= 70) {
               type: "code",
               title: "Exercise: Grade Classifier",
               instructions: `
-                <p>Write a program that classifies a score into a grade band. Given <code>score = 85</code>, print the appropriate grade:</p>
-                <ul>
-                  <li>90 and above → <code>Grade: A</code></li>
-                  <li>80–89 → <code>Grade: B</code></li>
-                  <li>70–79 → <code>Grade: C</code></li>
-                  <li>Below 70 → <code>Grade: F</code></li>
-                </ul>
-                <p>With <code>score = 85</code>, the output should be:</p>
+                <p>Complete the missing branch so that with <code>score = 85</code> the output is:</p>
                 <pre>Grade: B</pre>
               `,
               starter_code: `#include <stdio.h>
 
-int main() {
+int main(void) {
     int score = 85;
-    
+
     if (score >= 90) {
         printf("Grade: A\\n");
     } else if (score >= 80) {
-        // What goes here?
+        // Print Grade: B
     } else if (score >= 70) {
         printf("Grade: C\\n");
     } else {
         printf("Grade: F\\n");
     }
-    
+
     return 0;
 }`,
               expected_output: "Grade: B",
               check_mode: "exact",
-              hint: "The missing branch should print \"Grade: B\\n\" — just follow the pattern of the other branches.",
-              completion_message: "✅ Excellent! Your if/else chain correctly classifies the score. Notice how the conditions are checked top to bottom and the first true one executes."
+              hint: "Add printf(\"Grade: B\\n\"); in the 80+ branch.",
+              completion_message: "Good. Your condition chain classifies in the correct order."
             },
             {
               id: "m2l1s3",
@@ -427,51 +566,103 @@ if (x > 12) {
 }</code></pre>`,
               options: [
                 "Big",
-                "Big\nBigger\nBiggest",
-                "Big\nBigger",
-                "Bigger"
+                "Big, Bigger, Biggest",
+                "Big and Bigger",
+                "Bigger only"
               ],
               correct: 2,
-              explanation: "Correct! x = 10 satisfies both <code>x > 5</code> and <code>x > 8</code>, so both print. But <code>x > 12</code> is false (10 is not greater than 12), so \"Biggest\" is not printed. Because these are three separate <code>if</code> statements (not <code>else if</code>), all three are evaluated independently."
+              explanation: "Correct. The first two independent if statements are true; the last one is false."
+            },
+            {
+              id: "m2l1s4",
+              type: "content",
+              title: "Logical Operators for Compound Conditions",
+              body: `
+                <h2>Combining conditions</h2>
+                <p>Use logical operators to combine comparisons:</p>
+                <table class="info-table">
+                  <thead><tr><th>Operator</th><th>Name</th><th>Example</th></tr></thead>
+                  <tbody>
+                    <tr><td><code>&amp;&amp;</code></td><td>AND</td><td><code>age &gt;= 18 &amp;&amp; hasId == 1</code></td></tr>
+                    <tr><td><code>||</code></td><td>OR</td><td><code>isAdmin == 1 || isOwner == 1</code></td></tr>
+                    <tr><td><code>!</code></td><td>NOT</td><td><code>!(score &lt; 50)</code></td></tr>
+                  </tbody>
+                </table>
+                <p>Use parentheses to make intent explicit, especially when mixing operators.</p>
+              `
+            },
+            {
+              id: "m2l1s5",
+              type: "code",
+              title: "Exercise: Access Check",
+              instructions: `
+                <p>Write a condition that grants access when:</p>
+                <ul>
+                  <li>age is at least 18</li>
+                  <li>and the user has either an ID or a ticket</li>
+                </ul>
+                <p>With the starter values, expected output is:</p>
+                <pre>Access granted</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    int age = 20;
+    int hasId = 1;
+    int hasTicket = 0;
+
+    if (/* write condition */) {
+        printf("Access granted\\n");
+    } else {
+        printf("Access denied\\n");
+    }
+
+    return 0;
+}`,
+              expected_output: "Access granted",
+              check_mode: "exact",
+              hint: "Use: age >= 18 && (hasId == 1 || hasTicket == 1)",
+              completion_message: "Strong work. You used AND/OR grouping correctly."
+            },
+            {
+              id: "m2l1s6",
+              type: "quiz",
+              title: "Knowledge Check: assignment vs comparison",
+              question: "Which condition correctly checks whether x is equal to 5?",
+              options: [
+                "if (x = 5)",
+                "if (x == 5)",
+                "if (x := 5)",
+                "if (x equals 5)"
+              ],
+              correct: 1,
+              explanation: "Correct. == compares values; = assigns a value."
             }
           ]
         },
         {
           id: "m2l2",
-          title: "Lesson 2: Loops",
+          title: "Lesson 2: Loops in Practice",
           steps: [
             {
               id: "m2l2s1",
               type: "content",
-              title: "The for Loop",
+              title: "for Loop Mechanics",
               body: `
-                <h2>Repeating Actions: The for Loop</h2>
-                <p>A <strong>loop</strong> repeats a block of code multiple times. The <code>for</code> loop is ideal when you know exactly how many times you want to loop.</p>
-                <h3>Syntax</h3>
-                <pre><code>for (initialiser; condition; update) {
-    // repeated code
-}</code></pre>
-                <table class="info-table">
-                  <thead><tr><th>Part</th><th>Purpose</th><th>Example</th></tr></thead>
-                  <tbody>
-                    <tr><td><strong>Initialiser</strong></td><td>Runs once before the loop starts</td><td><code>int i = 0</code></td></tr>
-                    <tr><td><strong>Condition</strong></td><td>Checked before each iteration — loop continues while true</td><td><code>i &lt; 5</code></td></tr>
-                    <tr><td><strong>Update</strong></td><td>Runs after each iteration</td><td><code>i++</code></td></tr>
-                  </tbody>
-                </table>
-                <h3>Example: Count to 5</h3>
+                <h2>Counted repetition</h2>
+                <p>A <code>for</code> loop is ideal when the number of iterations is known.</p>
                 <pre><code>for (int i = 1; i <= 5; i++) {
     printf("%d\\n", i);
 }</code></pre>
-                <p>Output:</p>
-                <pre>1
-2
-3
-4
-5</pre>
-                <div class="info-box">
-                  <strong>💡 Note:</strong> <code>i++</code> is shorthand for <code>i = i + 1</code>. Similarly, <code>i--</code> decrements by 1.
-                </div>
+                <table class="info-table">
+                  <thead><tr><th>Section</th><th>Purpose</th></tr></thead>
+                  <tbody>
+                    <tr><td>initialization</td><td>runs once before loop starts</td></tr>
+                    <tr><td>condition</td><td>checked before each iteration</td></tr>
+                    <tr><td>update</td><td>runs after each iteration</td></tr>
+                  </tbody>
+                </table>
+                <p>Most off-by-one bugs come from the loop condition (<code>&lt;</code> vs <code>&lt;=</code>).</p>
               `
             },
             {
@@ -479,63 +670,39 @@ if (x > 12) {
               type: "code",
               title: "Exercise: Count to 5",
               instructions: `
-                <p>Write a <code>for</code> loop that counts from <strong>1 to 5</strong>, printing each number on its own line:</p>
+                <p>Complete the loop body so the program prints:</p>
                 <pre>1
 2
 3
 4
 5</pre>
-                <p>Use the loop variable <code>i</code> starting at 1 and going up to and including 5.</p>
               `,
               starter_code: `#include <stdio.h>
 
-int main() {
-    // Write a for loop that counts from 1 to 5
+int main(void) {
     for (int i = 1; i <= 5; i++) {
-        // Print i here
+        // Print i
     }
-    
     return 0;
 }`,
               expected_output: "1\n2\n3\n4\n5",
               check_mode: "exact",
-              hint: "Inside the loop body, add: printf(\"%d\\n\", i);",
-              completion_message: "🔁 Loops working! Your for loop counted from 1 to 5. Try changing the upper bound to count higher!"
+              hint: "Inside the loop: printf(\"%d\\n\", i);",
+              completion_message: "Good. Your for loop executes the expected number of times."
             },
             {
               id: "m2l2s3",
               type: "content",
-              title: "The while Loop",
+              title: "while Loop and Termination",
               body: `
-                <h2>The while Loop</h2>
-                <p>The <code>while</code> loop repeats as long as a condition remains true. Use it when you <em>don't know in advance</em> how many iterations you need.</p>
-                <h3>Syntax</h3>
-                <pre><code>while (condition) {
-    // repeated code
-}</code></pre>
-                <h3>Example: Countdown</h3>
+                <h2>Condition-driven repetition</h2>
+                <p>Use <code>while</code> when the stop point depends on changing state.</p>
                 <pre><code>int n = 3;
 while (n > 0) {
     printf("%d\\n", n);
     n--;
-}
-printf("Go!\\n");</code></pre>
-                <p>Output:</p>
-                <pre>3
-2
-1
-Go!</pre>
-                <div class="warning-box">
-                  <strong>⚠️ Infinite Loops:</strong> If the condition never becomes false, the loop runs forever. Always make sure your loop variable is updated inside the loop body!
-                </div>
-                <h3>for vs while — When to Use Which?</h3>
-                <table class="info-table">
-                  <thead><tr><th>Use</th><th>When</th></tr></thead>
-                  <tbody>
-                    <tr><td><code>for</code></td><td>You know how many iterations (counting)</td></tr>
-                    <tr><td><code>while</code></td><td>You loop until some condition changes</td></tr>
-                  </tbody>
-                </table>
+}</code></pre>
+                <p>If the condition never becomes false, the loop never ends. Always confirm that loop variables are updated inside the loop body.</p>
               `
             },
             {
@@ -543,44 +710,245 @@ Go!</pre>
               type: "code",
               title: "Exercise: Multiplication Table",
               instructions: `
-                <p>Use a <code>for</code> loop to print the 3× multiplication table from 1 to 5:</p>
+                <p>Use a loop to print the 3-times table from 1 to 5:</p>
                 <pre>3 x 1 = 3
 3 x 2 = 6
 3 x 3 = 9
 3 x 4 = 12
 3 x 5 = 15</pre>
-                <p>Use the variable <code>n = 3</code> and loop from <code>i = 1</code> to <code>i = 5</code>.</p>
               `,
               starter_code: `#include <stdio.h>
 
-int main() {
+int main(void) {
     int n = 3;
-    
+
     for (int i = 1; i <= 5; i++) {
-        // Print: n x i = (n*i)
-        // e.g. printf("%d x %d = %d\\n", n, i, n*i);
+        // Print one table row
     }
-    
+
     return 0;
 }`,
               expected_output: "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15",
               check_mode: "exact",
-              hint: "Inside the loop, add: printf(\"%d x %d = %d\\n\", n, i, n * i);",
-              completion_message: "🏆 Outstanding! You've printed the entire 3× table using a loop. This pattern — generating a series of related values — is fundamental to programming."
+              hint: "Use printf(\"%d x %d = %d\\n\", n, i, n * i);",
+              completion_message: "Great. You generated a computed sequence with a loop."
             },
             {
               id: "m2l2s5",
               type: "quiz",
-              title: "Knowledge Check: Loops",
-              question: "How many times will this loop body execute?<br><pre><code>for (int i = 0; i < 3; i++) {\n    printf(\"Hi\\n\");\n}</code></pre>",
+              title: "Knowledge Check: loop iterations",
+              question: `How many times does this loop run?
+<pre><code>for (int i = 0; i < 3; i++) {
+    printf("Hi\\n");
+}</code></pre>`,
               options: [
-                "2 times",
-                "3 times",
-                "4 times",
-                "Infinite — there is no stop condition"
+                "2",
+                "3",
+                "4",
+                "Infinite"
               ],
               correct: 1,
-              explanation: "Correct! The loop starts at i = 0 and continues while i < 3. So it runs for i = 0, i = 1, and i = 2 — that's 3 iterations. After i++ makes i = 3, the condition i < 3 becomes false and the loop stops."
+              explanation: "Correct. i takes values 0, 1, and 2, then stops when i becomes 3."
+            },
+            {
+              id: "m2l2s6",
+              type: "code",
+              title: "Exercise: Running Total",
+              instructions: `
+                <p>Use a loop to add integers from 1 to 10 and print:</p>
+                <pre>Total: 55</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    int total = 0;
+
+    // Loop from 1 to 10 and add into total
+
+    printf("Total: %d\\n", total);
+    return 0;
+}`,
+              expected_output: "Total: 55",
+              check_mode: "exact",
+              hint: "for (int i = 1; i <= 10; i++) total += i;",
+              completion_message: "Excellent. You used an accumulator pattern correctly."
+            },
+            {
+              id: "m2l2s7",
+              type: "quiz",
+              title: "Predict the Output: while loop",
+              question: `What is printed?
+<pre><code>int n = 2;
+while (n >= 0) {
+    printf("%d\\n", n);
+    n--;
+}</code></pre>`,
+              options: [
+                "2 then 1",
+                "2 then 1 then 0",
+                "2 then 1 then 0 then -1",
+                "Infinite loop"
+              ],
+              correct: 1,
+              explanation: "Correct. The condition includes 0, so output is 2, 1, 0."
+            },
+            {
+              id: "m2l2s8",
+              type: "content",
+              title: "Nested Loops",
+              body: `
+                <h2>Loops inside loops</h2>
+                <p>Nested loops are useful for grids, tables, and patterns.</p>
+                <pre><code>for (int row = 1; row <= 3; row++) {
+    for (int col = 1; col <= row; col++) {
+        printf("*");
+    }
+    printf("\\n");
+}</code></pre>
+                <p>Outer loop controls rows, inner loop controls items per row.</p>
+              `
+            },
+            {
+              id: "m2l2s9",
+              type: "code",
+              title: "Exercise: Star Triangle",
+              instructions: `
+                <p>Use nested loops to print exactly:</p>
+                <pre>*
+**
+***
+****</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    for (int row = 1; row <= 4; row++) {
+        // Inner loop should print stars for this row
+        for (int col = 1; col <= row; col++) {
+            // Print one star (no newline here)
+        }
+        // Print newline at end of each row
+    }
+    return 0;
+}`,
+              expected_output: "*\n**\n***\n****",
+              check_mode: "exact",
+              hint: "Use printf(\"*\"); inside inner loop and printf(\"\\n\"); after it.",
+              completion_message: "Nice. You used nested loops to generate structured output."
+            }
+          ]
+        },
+        {
+          id: "m2l3",
+          title: "Lesson 3: switch, break, and continue",
+          steps: [
+            {
+              id: "m2l3s1",
+              type: "content",
+              title: "switch Statements and Loop Control",
+              body: `
+                <h2>When to use switch</h2>
+                <p><code>switch</code> is useful when one value can match one of many fixed cases.</p>
+                <pre><code>switch (day) {
+    case 1: printf("Monday\\n"); break;
+    case 2: printf("Tuesday\\n"); break;
+    default: printf("Invalid\\n");
+}</code></pre>
+                <h3>Loop control keywords</h3>
+                <ul>
+                  <li><code>break</code> exits the nearest loop or switch block immediately</li>
+                  <li><code>continue</code> skips to the next loop iteration</li>
+                </ul>
+              `
+            },
+            {
+              id: "m2l3s2",
+              type: "code",
+              title: "Exercise: Day Name with switch",
+              instructions: `
+                <p>Complete the switch so that with <code>day = 3</code> the program prints:</p>
+                <pre>Wednesday</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    int day = 3;
+
+    switch (day) {
+        case 1:
+            printf("Monday\\n");
+            break;
+        case 2:
+            printf("Tuesday\\n");
+            break;
+        case 3:
+            // Print Wednesday and break
+            break;
+        default:
+            printf("Invalid day\\n");
+    }
+
+    return 0;
+}`,
+              expected_output: "Wednesday",
+              check_mode: "exact",
+              hint: "In case 3, print Wednesday then add break.",
+              completion_message: "Good. You mapped case values to output correctly."
+            },
+            {
+              id: "m2l3s3",
+              type: "quiz",
+              title: "Knowledge Check: fall-through",
+              question: "If a <code>switch</code> case does not include <code>break</code>, what happens?",
+              options: [
+                "Compilation fails",
+                "Execution continues into the next case",
+                "Program exits immediately",
+                "The condition is re-evaluated"
+              ],
+              correct: 1,
+              explanation: "Correct. Without break, control falls through to subsequent cases."
+            },
+            {
+              id: "m2l3s4",
+              type: "code",
+              title: "Exercise: Print Odd Numbers with continue",
+              instructions: `
+                <p>Use <code>continue</code> so the loop prints only odd numbers from 1 to 8:</p>
+                <pre>1
+3
+5
+7</pre>
+              `,
+              starter_code: `#include <stdio.h>
+
+int main(void) {
+    for (int i = 1; i <= 8; i++) {
+        if (i % 2 == 0) {
+            // Skip even numbers
+        }
+        printf("%d\\n", i);
+    }
+    return 0;
+}`,
+              expected_output: "1\n3\n5\n7",
+              check_mode: "exact",
+              hint: "Inside the if block, use continue;",
+              completion_message: "Great. continue let you skip unwanted iterations cleanly."
+            },
+            {
+              id: "m2l3s5",
+              type: "quiz",
+              title: "Knowledge Check: break in loops",
+              question: "Inside a loop, what does <code>break</code> do?",
+              options: [
+                "Skips just the current iteration",
+                "Exits the loop immediately",
+                "Restarts the loop from the beginning",
+                "Only works in switch, not loops"
+              ],
+              correct: 1,
+              explanation: "Correct. break terminates the current loop immediately."
             }
           ]
         }
