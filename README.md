@@ -101,6 +101,10 @@ If your site doesn't load assets, confirm these are true:
   - If you still see an older error message, do a hard refresh (`Ctrl/Cmd+Shift+R`) to clear cached JavaScript after redeploys.
   - New: when all runtime sources are blocked, the app now falls back to a limited built-in C subset executor for beginner exercises, and shows a warning in console output.
 
+### Pages Redeploy Marker
+
+This README was updated on **2026-03-05** to force a new commit on `main` and trigger a fresh GitHub Pages publish.
+
 ## Adding New Content
 
 All course content is defined in [`assets/js/course-data.js`](assets/js/course-data.js). No code changes are needed to add lessons — just extend the JSON structure:
