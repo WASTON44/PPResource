@@ -86,11 +86,18 @@ const Storage = (() => {
   }
 
   /**
-   * Count total completed steps.
+   * Count total completed steps, optionally scoped to current step IDs.
+   * @param {string[]} [validStepIds]
    * @returns {number}
    */
-  function countCompleted() {
-    return getCompletedSteps().length;
+  function countCompleted(validStepIds) {
+    const completed = getCompletedSteps();
+    if (!Array.isArray(validStepIds) || validStepIds.length === 0) {
+      return completed.length;
+    }
+
+    const validIds = new Set(validStepIds);
+    return completed.filter(stepId => validIds.has(stepId)).length;
   }
 
   return {

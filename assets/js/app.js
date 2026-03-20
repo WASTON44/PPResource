@@ -70,7 +70,7 @@ const App = (() => {
     const bar = document.getElementById('progressArea');
     if (!bar) return;
     const total = _allSteps.length;
-    const completed = Storage.countCompleted();
+    const completed = Storage.countCompleted(_allSteps.map(item => item.step.id));
     bar.innerHTML = UI.buildProgressBar(completed, total);
   }
 

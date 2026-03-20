@@ -13,13 +13,21 @@ An interactive, step-by-step C programming course that runs **fully in the brows
 - **Progress Persistence** — localStorage-based resume on refresh
 - **No Server Required** — Fully static HTML/CSS/JS
 
-## Course Content (MVP)
+## Course Content
 
 | Module | Lessons | Steps | Code Exercises |
 |--------|---------|-------|----------------|
 | Module 1: C Basics | Hello World, printf, Variables | 12 | 4 |
 | Module 2: Control Flow | if/else, Loops | 8 | 3 |
-| **Total** | | **20** | **7** |
+| Module 3: Software Development Methodology | Analysis, verification, debugging | 12 | 3 |
+| Module 4: Types and Casting | Data types, conversions, casting bugs | 12 | 3 |
+| Module 5: Arrays | Indexing, traversal, bounds bugs | 12 | 3 |
+| Module 6: Strings | Char arrays, updates, string debugging | 12 | 3 |
+| Module 7: Functions | Definitions, parameters, function debugging | 12 | 3 |
+| Module 8: Pointers | Addresses, dereferencing, pointer safety | 12 | 3 |
+| Module 9: Structures | Records, member access, struct debugging | 12 | 3 |
+| Module 10: File Input and Output | Modes, workflow, simulated file debugging | 12 | 3 |
+| **Total** | | **116** | **31** |
 
 ## Project Structure
 
