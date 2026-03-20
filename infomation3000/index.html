@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="dashboard-html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Student Progress - Information 3000</title>
+  <meta name="description" content="Local student signup and progress dashboard for the interactive C programming course.">
+  <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body class="dashboard-page">
+  <main class="dashboard-shell">
+    <header class="dashboard-header">
+      <div>
+        <p class="dashboard-kicker">Information 3000</p>
+        <h1>Student Progress Dashboard</h1>
+        <p class="dashboard-subtitle">
+          This page lists student accounts and progress saved in the current browser. GitHub Pages hosting does not provide shared server-side student records.
+        </p>
+        <p id="dashboardCourseMeta" class="dashboard-meta"></p>
+      </div>
+      <div class="dashboard-actions">
+        <a class="btn btn-secondary" href="../">Back to Course</a>
+      </div>
+    </header>
+
+    <section class="dashboard-stats">
+      <article class="dashboard-stat-card">
+        <span class="dashboard-stat-label">Students</span>
+        <strong id="statStudents" class="dashboard-stat-value">0</strong>
+      </article>
+      <article class="dashboard-stat-card">
+        <span class="dashboard-stat-label">Active</span>
+        <strong id="statActive" class="dashboard-stat-value">0</strong>
+      </article>
+      <article class="dashboard-stat-card">
+        <span class="dashboard-stat-label">Complete</span>
+        <strong id="statComplete" class="dashboard-stat-value">0</strong>
+      </article>
+      <article class="dashboard-stat-card">
+        <span class="dashboard-stat-label">Average Progress</span>
+        <strong id="statAverage" class="dashboard-stat-value">0%</strong>
+      </article>
+    </section>
+
+    <section class="step-content-panel">
+      <div class="step-header">
+        <span class="step-type-badge type-content">Local Dashboard</span>
+        <h2 class="step-title">Registered Students</h2>
+      </div>
+      <div id="dashboardPanel" class="dashboard-panel">
+        <p>Loading student data...</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/course-data.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/storage.js"></script>
+  <script src="../assets/js/progress-dashboard.js"></script>
+</body>
+</html>

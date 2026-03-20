@@ -16,14 +16,68 @@
 </head>
 <body>
 
+<section id="authShell" aria-label="Student sign up and login">
+  <div class="auth-card">
+    <div class="auth-card-header">
+      <p class="auth-kicker">QUB Student Access</p>
+      <h1>Start the Course</h1>
+      <p class="auth-subtitle">Sign up with your QUB email or log in to continue with tracked progress.</p>
+    </div>
+
+    <div class="auth-tabs" role="tablist" aria-label="Authentication options">
+      <button class="auth-tab active" id="signupTab" type="button" data-auth-target="signupPanel" aria-selected="true">Sign Up</button>
+      <button class="auth-tab" id="loginTab" type="button" data-auth-target="loginPanel" aria-selected="false">Log In</button>
+    </div>
+
+    <div id="authFeedback" class="auth-feedback" aria-live="polite"></div>
+
+    <div class="auth-panel-wrap">
+      <form id="signupPanel" class="auth-form" novalidate>
+        <label class="auth-field">
+          <span>Full Name</span>
+          <input id="signupName" name="name" type="text" autocomplete="name" placeholder="Student name" required>
+        </label>
+        <label class="auth-field">
+          <span>Student ID</span>
+          <input id="signupStudentId" name="studentId" type="text" autocomplete="username" placeholder="e.g. 40234567" required>
+        </label>
+        <label class="auth-field">
+          <span>QUB Email</span>
+          <input id="signupEmail" name="email" type="email" autocomplete="email" placeholder="name@qub.ac.uk" required>
+        </label>
+        <button class="btn btn-primary auth-submit" type="submit">Create Account</button>
+        <p class="auth-note">Only addresses ending in <code>@qub.ac.uk</code> are accepted.</p>
+      </form>
+
+      <form id="loginPanel" class="auth-form is-hidden" novalidate>
+        <label class="auth-field">
+          <span>Student ID</span>
+          <input id="loginStudentId" name="studentId" type="text" autocomplete="username" placeholder="Your student ID" required>
+        </label>
+        <label class="auth-field">
+          <span>QUB Email</span>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" placeholder="name@qub.ac.uk" required>
+        </label>
+        <button class="btn btn-primary auth-submit" type="submit">Log In</button>
+        <p class="auth-note">This GitHub Pages version stores student accounts and progress in the current browser only, and only for this exact site address.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ─── App shell ──────────────────────────────────────────────── -->
-<div id="appLayout">
+<div id="appLayout" hidden>
 
   <!-- ─ Top bar ──────────────────────────────────────────────── -->
   <header id="topBar" role="banner">
     <button id="toggleSidebarBtn" aria-label="Toggle course menu" title="Toggle menu">☰</button>
     <span class="course-title">Introduction to C Programming</span>
     <div id="progressArea" aria-label="Course progress"></div>
+    <div class="topbar-user">
+      <a class="btn btn-ghost topbar-link" href="infomation3000/">Student Progress</a>
+      <div id="authUserSummary" class="auth-user-summary" aria-live="polite"></div>
+      <button class="btn btn-ghost topbar-link" id="logoutBtn" type="button">Log Out</button>
+    </div>
   </header>
 
   <!-- ─ Sidebar ──────────────────────────────────────────────── -->
@@ -66,6 +120,7 @@
 
 <!-- ─── Application scripts (dependency order) ─────────────────── -->
 <script src="assets/js/course-data.js"></script>
+<script src="assets/js/auth.js"></script>
 <script src="assets/js/storage.js"></script>
 <script src="assets/js/runner.js?v=20260227"></script>
 <script src="assets/js/editor.js"></script>
